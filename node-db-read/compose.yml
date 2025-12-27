@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: db-read
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: appdb
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata_read:/var/lib/postgresql/data
+
+volumes:
+  pgdata_read:

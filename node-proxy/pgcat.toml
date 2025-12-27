@@ -1,0 +1,25 @@
+[general]
+host = "0.0.0.0"
+port = 6432
+
+[pools.appdb]
+user = "app"
+password = "pass"
+database = "appdb"
+pool_mode = "transaction"
+
+# -----------------------------
+# WRITE → Primary DB (db-write)
+# -----------------------------
+[pools.appdb.shards.0.servers.0]
+host = "10.0.0.10"   # IP ของ node db-write
+port = 5433          # ← จาก "5433:5432"
+role = "primary"
+
+# -----------------------------
+# READ → Replica DB (db-read)
+# -----------------------------
+[pools.appdb.shards.0.servers.1]
+host = "10.0.0.11"   # IP ของ node db-read
+port = 5434          # ← จาก "5434:5432"
+role = "replica"
